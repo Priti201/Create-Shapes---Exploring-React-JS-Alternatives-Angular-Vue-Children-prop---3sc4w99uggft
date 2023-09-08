@@ -1,28 +1,40 @@
 import React from 'react'
-import { useState } from "react";
+import {useState} from 'react';
 import '../styles/App.css';
+
 const App = () => {
-const [shape, setShape] = useState("Square");
 
-  const handleShapeChange = (event) => {
-    setShape(event.target.value);
-  };
+  const [shape, setShape] = useState("square");
+  const [shapesArr, setShapesArr] = useState([]);
 
-  const handleAddShapeClick = () => {
-    const divClass = shape === "Square" ? "square" : "circle";
-    const div = <div className={divClass} />;
-    document.getElementById("shapes-holder").appendChild(div);
-  };
+  // console.log(shape);
+  // console.log(shapesArr);
+  function handleShape(e) {
+    const {value} = e.target;
+    // console.log(value);
+    setShape(value);
+  }
+
+  function handleShapesArr() {
+    setShapesArr((prevArr) => (
+      [...prevArr, shape]
+    ))
+  }
+  
   return (
     <div id="main">
       <div id="shape-creator">
-        <select onChange={handleShapeChange}>
-          <option value="Square">Square</option>
-          <option value="Circle">Circle</option>
+        <select onChange={handleShape}>
+          <option value="square">Square</option>
+          <option value="circle">Circle</option>
         </select>
-        <button onClick={handleAddShapeClick}>Add Shape</button>
+        <button onClick={handleShapesArr}>Add Shape</button>
       </div>
+    
       <div id="shapes-holder">
+				{shapesArr.map((element, index) => (
+          <div key={index} className={element}>{index}</div>
+        ))}
       </div>
     </div>
   )
