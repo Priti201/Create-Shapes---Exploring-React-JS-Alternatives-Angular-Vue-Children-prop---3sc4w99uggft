@@ -21,7 +21,6 @@ const [shape, setShape] = useState("Square");
         </select>
         <button onClick={handleAddShapeClick}>Add Shape</button>
       </div>
-      </div>
       <div id="shapes-holder">
       </div>
     </div>
